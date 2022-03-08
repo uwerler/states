@@ -26,7 +26,7 @@ Run this runner via a schedule on all salt masters.
 
 reactor.set_leader:
   salt.runner:
-    - arg: 
+    - arg:
       - {{ arg }}
 
 {% endif %}
