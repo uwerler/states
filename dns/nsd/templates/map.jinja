@@ -1,0 +1,30 @@
+{% set map = salt['grains.filter_by']({
+    'OpenBSD': {
+        'service': 'nsd',
+        'config_file': '/var/nsd/etc/nsd.conf',
+        'config_dir': '/var/nsd/etc/nsd.conf.d',
+        'nsd_directory': '/var/nsd',
+        'zones_directory': '/var/nsd/zones',
+        'chroot_dir': '/var/nsd',
+	'user': '_nsd',
+	'group': '_nsd',
+	'root_group': 'wheel',
+	'master_dirmode': '755',
+	'slave_dirmode': '775',
+	'mode': '644'
+    },
+    'Ubuntu': {
+        'service': 'nsd',
+        'config_file': '/etc/nsd/nsd.conf',
+        'config_dir': '/etc/nsd/nsd.conf.d',
+        'zones_directory': '/var/lib/nsd/zones',
+        'nsd_directory': '/var/lib/nsd',
+        'chroot_dir': '',
+	'user': 'nsd',
+	'group': 'nsd',
+	'root_group': 'root',
+	'master_dirmode': '755',
+	'slave_dirmode': '775',
+	'mode': '644'
+    },
+}, grain='os', merge=salt['pillar.get']('nsd:config')) %}
